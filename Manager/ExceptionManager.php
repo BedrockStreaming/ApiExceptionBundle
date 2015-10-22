@@ -47,7 +47,6 @@ class ExceptionManager
 
         $exception->setCode($configException['code']);
         $exception->setMessage($configException['message']);
-        $exception->setLevel($configException['level']);
 
         if ($exception instanceof HttpExceptionInterface) {
             $exception->setStatusCode($configException['status']);

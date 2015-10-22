@@ -30,7 +30,6 @@ class ExceptionManager extends test
             'status'    => 400,
             'code'      => 1000,
             'message'   => 'bad request',
-            'level'     => 'error',
             'headers'   => []
         ];
     }
@@ -52,7 +51,6 @@ class ExceptionManager extends test
                 'status'  => 404,
                 'code'    => 1003,
                 'message' => 'notify type not found',
-                'level'   => 'warning'
             ],
             'M6Web\\Bundle\\ApiExceptionBundle\\Exception\\BadRequestException' => [
             ]
@@ -78,8 +76,6 @@ class ExceptionManager extends test
                     ->isEqualTo($defaultConfig['code'])
                 ->string($exception->getMessage())
                     ->isEqualTo($defaultConfig['message'])
-                ->string($exception->getLevel())
-                    ->isEqualTo($defaultConfig['level'])
 
             ->object($exception = $exceptionManager->configure($validationFormException))
                 ->isInstanceOf('M6Web\Bundle\ApiExceptionBundle\Exception\ValidationFormException')
@@ -87,8 +83,6 @@ class ExceptionManager extends test
                     ->isEqualTo($exceptionsConfig['M6Web\Bundle\ApiExceptionBundle\Exception\ValidationFormException']['code'])
                 ->string($exception->getMessage())
                     ->isEqualTo($exceptionsConfig['M6Web\Bundle\ApiExceptionBundle\Exception\ValidationFormException']['message'])
-                ->string($exception->getLevel())
-                    ->isEqualTo($defaultConfig['level'])
                 ->integer($exception->getStatusCode())
                     ->isEqualTo($defaultConfig['status'])
                 ->array($headers = $exception->getHeaders())
@@ -102,8 +96,6 @@ class ExceptionManager extends test
                     ->isEqualTo($exceptionsConfig['M6Web\Bundle\ApiExceptionBundle\Tests\Fixtures\Exception\TypeNotFoundHttpException']['code'])
                 ->string($exception->getMessage())
                     ->isEqualTo($exceptionsConfig['M6Web\Bundle\ApiExceptionBundle\Tests\Fixtures\Exception\TypeNotFoundHttpException']['message'])
-                ->string($exception->getLevel())
-                    ->isEqualTo($exceptionsConfig['M6Web\Bundle\ApiExceptionBundle\Tests\Fixtures\Exception\TypeNotFoundHttpException']['level'])
                 ->integer($exception->getStatusCode())
                     ->isEqualTo($exceptionsConfig['M6Web\Bundle\ApiExceptionBundle\Tests\Fixtures\Exception\TypeNotFoundHttpException']['status'])
                 ->array($exception->getHeaders())

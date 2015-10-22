@@ -30,9 +30,4 @@ interface HttpExceptionInterface
      * Get headers
      */
     public function getHeaders();
-
-    /**
-     * Get log level
-     */
-    public function getLevel();
 }

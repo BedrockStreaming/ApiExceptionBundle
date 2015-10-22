@@ -38,11 +38,6 @@ class ExceptionListener
     protected $exceptionManager;
 
     /**
-     * @var LoggerInterface
-     */
-    protected $logger;
-
-    /**
      * @var boolean
      */
     protected $matchAll;
@@ -52,7 +47,6 @@ class ExceptionListener
      *
      * @param Kernel           $kernel
      * @param ExceptionManager $exceptionManager
-     * @param LoggerInterface  $logger
      * @param boolean          $matchAll
      * @param array            $default
      * @param boolean          $stackTrace
@@ -60,14 +54,12 @@ class ExceptionListener
     public function __construct(
         Kernel $kernel,
         ExceptionManager $exceptionManager,
-        LoggerInterface $logger,
         $matchAll,
         array $default,
         $stackTrace = false
     ) {
         $this->kernel           = $kernel;
         $this->exceptionManager = $exceptionManager;
-        $this->logger           = $logger;
         $this->matchAll         = $matchAll;
         $this->default          = $default;
         $this->stackTrace       = $stackTrace;
@@ -106,51 +98,8 @@ class ExceptionListener
             $data['error']['stack_trace'] = $exception->getTrace();
         }
 
-        $this->writeLog($exception);
-
         $response = new JsonResponse($data, $statusCode, $this->getHeaders($exception));
         $event->setResponse($response);
-    }
-
-    /**
-     * Write log exception
-     *
-     * @param mixed $exception
-     */
-    public function writeLog($exception)
-    {
-        $statusCode = $this->getStatusCode($exception);
-
-        $log = sprintf(
-            'Code %d - Status %d | Message : %s',
-            $exception->getCode(),
-            $statusCode,
-            $exception->getMessage()
-        );
-
-        if ($this->isFlattenErrorException($exception)) {
-            $errors = $exception->getFlattenErrors();
-
-            $logErrors = '';
-            foreach ($errors as $field => $error) {
-                $logErrors .= sprintf('%s :', $field);
-                foreach ($error as $message) {
-                    $logErrors .= sprintf(' %s', $message);
-                }
-                $logErrors .= ' - ';
-            }
-            $logErrors = substr($logErrors, 0, -3);
-
-            $log .= sprintf(' | Errors : [ %s ]', $logErrors);
-        }
-
-        if ($this->stackTrace) {
-            $log .= sprintf(' | Stack Trace : [ %s ]', json_encode($exception->getTrace()));
-        }
-
-        $level = $this->getLevel($exception);
-
-        $this->logger->create($log, $level);
     }
 
     /**
@@ -209,24 +158,6 @@ class ExceptionListener
         }
 
         return $headers;
-    }
-
-    /**
-     * Get exception level
-     *
-     * @param $exception
-     *
-     * @return string
-     */
-    private function getLevel($exception)
-    {
-        $level = $this->default['level'];
-
-        if ($this->isApiException($exception)) {
-            $level = $exception->getLevel();
-        }
-
-        return $level;
     }
 
     /**

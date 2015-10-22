@@ -25,19 +25,17 @@ class HttpException extends Exception implements HttpExceptionInterface
      * @param integer $statusCode
      * @param integer $code
      * @param string  $message
-     * @param string  $level
      * @param array   $headers
      */
     public function __construct(
         $statusCode = 500,
         $code = 0,
         $message = '',
-        $level = 'error',
         array $headers = []
     ) {
         $this->statusCode = $statusCode;
         $this->headers    = $headers;
-        parent::__construct($code, $message, $level);
+        parent::__construct($code, $message);
     }
 
     /**

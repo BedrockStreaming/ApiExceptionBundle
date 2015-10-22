@@ -12,23 +12,15 @@ class Exception extends \Exception implements ExceptionInterface
     const VARIABLE_REGEX = "/(\{[a-zA-Z0-9\_]+\})/";
 
     /**
-     * @var string
-     */
-    protected $level;
-
-    /**
      * Constructor
      *
      * @param integer $code
      * @param string  $message
-     * @param string  $level
      */
     public function __construct(
         $code = 0,
-        $message = '',
-        $level = 'error'
+        $message = ''
     ) {
-        $this->level = $level;
         parent::__construct($message, $code);
     }
 
@@ -58,30 +50,6 @@ class Exception extends \Exception implements ExceptionInterface
         $this->message = $message;
 
         return $this;
-    }
-
-    /**
-     * Set level
-     *
-     * @param string $level
-     *
-     * @return self
-     */
-    public function setLevel($level)
-    {
-        $this->level = $level;
-
-        return $this;
-    }
-
-    /**
-     * Get level
-     *
-     * @return string
-     */
-    public function getLevel()
-    {
-        return $this->level;
     }
 
     /**

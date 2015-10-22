@@ -32,18 +32,6 @@ interface ExceptionInterface
     public function getMessage();
 
     /**
-     * Set log level
-     *
-     * @param string $level
-     */
-    public function setLevel($level);
-
-    /**
-     * Get log level
-     */
-    public function getLevel();
-
-    /**
      * Get message with variables
      */
     public function getMessageWithVariables();

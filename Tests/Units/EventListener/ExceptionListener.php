@@ -110,19 +110,6 @@ class ExceptionListener extends test
     }
 
     /**
-     * @return \mock\M6Web\Bundle\ApiExceptionBundle\Logger\Logger
-     */
-    protected function getLoggerMock()
-    {
-        $this->mockGenerator->orphanize('__construct');
-        $logger = new \mock\M6Web\Bundle\ApiExceptionBundle\Logger\Logger;
-
-        $logger->getMockController()->create = function($message) { return $message; };
-
-        return $logger;
-    }
-
-    /**
      * @return \mock\Symfony\Component\Form\Form
      */
     protected function getFormMock()
@@ -161,7 +148,6 @@ class ExceptionListener extends test
             'status'  => $statusCode,
             'code'    => $code,
             'message' => $message,
-            'level'   => 'error',
             'headers' => $headers,
         ];
         $data = [
@@ -171,7 +157,6 @@ class ExceptionListener extends test
                 'message' => $message,
             ]
         ];
-        $log = 'Code '.$code.' - Status '.$statusCode.' | Message : '.$message;
 
         $this
             ->given(
@@ -180,8 +165,7 @@ class ExceptionListener extends test
                 $exceptionManager  = $this->getManagerException($configExceptionDefault),
                 $request           = $this->getRequestMock('/test-uri/', 'GET'),
                 $event             = $this->getGetResponseForExceptionEventMock($request, $exception),
-                $logger            = $this->getLoggerMock(),
-                $exceptionListener = new TestedClass($kernel, $exceptionManager, $logger, $matchAll, $configExceptionDefault, false),
+                $exceptionListener = new TestedClass($kernel, $exceptionManager, $matchAll, $configExceptionDefault, false),
                 $exceptionListener->onKernelException($event),
                 $validResponse     = new JsonResponse($data, $statusCode, $headers)
             )
@@ -189,10 +173,6 @@ class ExceptionListener extends test
             ->mock($event)
                 ->call('setResponse')
                     ->withArguments($validResponse)
-                    ->once()
-            ->mock($logger)
-                ->call('create')
-                    ->withArguments($log, 'error')
                     ->once()
         ;
     }
@@ -203,7 +183,6 @@ class ExceptionListener extends test
         $matchAll   = true;
         $statusCode = 400;
         $code       = 1000;
-        $level      = 'warning';
         $message    = 'This is an exception for test listener';
         $headers    = [
             'Exception' => 'bad request'
@@ -212,13 +191,11 @@ class ExceptionListener extends test
             'status'  => $statusCodeDefault,
             'code'    => 0,
             'message' => $message,
-            'level'   => 'error',
             'headers' => $headers,
         ];
         $configException = $configExceptionDefault;
         $configException['status']  = $statusCode;
         $configException['code']    = $code;
-        $configException['level']   = $level;
         $configException['headers'] = [];
         $data = [
             'error' => [
@@ -227,7 +204,6 @@ class ExceptionListener extends test
                 'message' => $message,
             ]
         ];
-        $log = 'Code '.$code.' - Status '.$statusCodeDefault.' | Message : '.$message;
 
         $this
             ->given(
@@ -236,8 +212,7 @@ class ExceptionListener extends test
                 $exceptionManager  = $this->getManagerException($configException),
                 $request           = $this->getRequestMock('/test-uri/', 'GET'),
                 $event             = $this->getGetResponseForExceptionEventMock($request, $exception),
-                $logger            = $this->getLoggerMock(),
-                $exceptionListener = new TestedClass($kernel, $exceptionManager, $logger, $matchAll, $configExceptionDefault),
+                $exceptionListener = new TestedClass($kernel, $exceptionManager, $matchAll, $configExceptionDefault),
                 $exceptionListener->onKernelException($event),
                 $validResponse     = new JsonResponse($data, $statusCodeDefault, $headers)
             )
@@ -245,10 +220,6 @@ class ExceptionListener extends test
             ->mock($event)
                 ->call('setResponse')
                     ->withArguments($validResponse)
-                    ->once()
-            ->mock($logger)
-                ->call('create')
-                    ->withArguments($log, $level)
                     ->once()
         ;
     }
@@ -266,7 +237,6 @@ class ExceptionListener extends test
             'status'  => '500',
             'code'    => 0,
             'message' => $message,
-            'level'   => 'error',
             'headers' => [],
         ];
         $configException = $configExceptionDefault;
@@ -280,7 +250,6 @@ class ExceptionListener extends test
                 'message' => $message,
             ]
         ];
-        $log = 'Code '.$code.' - Status '.$statusCode.' | Message : '.$message;
 
         $this
             ->given(
@@ -289,8 +258,7 @@ class ExceptionListener extends test
                 $exceptionManager  = $this->getManagerException($configException),
                 $request           = $this->getRequestMock('/test-uri/', 'GET'),
                 $event             = $this->getGetResponseForExceptionEventMock($request, $exception),
-                $logger            = $this->getLoggerMock(),
-                $exceptionListener = new TestedClass($kernel, $exceptionManager, $logger, $matchAll, $configExceptionDefault),
+                $exceptionListener = new TestedClass($kernel, $exceptionManager, $matchAll, $configExceptionDefault),
                 $exceptionListener->onKernelException($event),
                 $validResponse     = new JsonResponse($data, $statusCode, $headers)
             )
@@ -298,10 +266,6 @@ class ExceptionListener extends test
             ->mock($event)
                 ->call('setResponse')
                     ->withArguments($validResponse)
-                    ->once()
-            ->mock($logger)
-                ->call('create')
-                    ->withArguments($log, 'error')
                     ->once()
         ;
     }
@@ -320,7 +284,6 @@ class ExceptionListener extends test
             'status'  => $statusCode,
             'code'    => $code,
             'message' => $message,
-            'level'   => 'error',
             'headers' => $headers,
         ];
         $data = [
@@ -330,19 +293,16 @@ class ExceptionListener extends test
                 'message'     => $message,
             ]
         ];
-        $log = 'Code '.$code.' - Status '.$statusCode.' | Message : '.$message;
 
         $this
             ->given(
                 $exception         = new BadRequestException,
                 $data['error']['stack_trace'] = $exception->getTrace(),
-                $log .= ' | Stack Trace : [ '.json_encode($exception->getTrace()).' ]',
                 $kernel            = $this->getKernelMock(),
                 $exceptionManager  = $this->getManagerException($configExceptionDefault),
                 $request           = $this->getRequestMock('/test-uri/', 'GET'),
                 $event             = $this->getGetResponseForExceptionEventMock($request, $exception),
-                $logger            = $this->getLoggerMock(),
-                $exceptionListener = new TestedClass($kernel, $exceptionManager, $logger, $matchAll, $configExceptionDefault, $stackTrace),
+                $exceptionListener = new TestedClass($kernel, $exceptionManager, $matchAll, $configExceptionDefault, $stackTrace),
                 $exceptionListener->onKernelException($event),
                 $validResponse     = new JsonResponse($data, $statusCode, $headers)
             )
@@ -350,10 +310,6 @@ class ExceptionListener extends test
             ->mock($event)
                 ->call('setResponse')
                     ->withArguments($validResponse)
-                    ->once()
-            ->mock($logger)
-                ->call('create')
-                    ->withArguments($log, 'error')
                     ->once()
         ;
     }
@@ -363,7 +319,6 @@ class ExceptionListener extends test
         $matchAll   = true;
         $statusCode = 400;
         $code       = 1000;
-        $level      = 'error';
         $message    = 'This is an exception for test listener';
         $headers    = [
             'Exception' => 'bad request'
@@ -372,7 +327,6 @@ class ExceptionListener extends test
             'status'  => $statusCode,
             'code'    => $code,
             'message' => $message,
-            'level'   => $level,
             'headers' => $headers,
         ];
         $errors = [
@@ -389,7 +343,6 @@ class ExceptionListener extends test
                 'errors'      => $errors
             ]
         ];
-        $log = 'Code '.$code.' - Status '.$statusCode.' | Message : '.$message.' | Errors : [ name : '.$errors['name'][0].' '.$errors['name'][1].' ]';
 
         $this
             ->given(
@@ -398,8 +351,7 @@ class ExceptionListener extends test
                 $exceptionManager  = $this->getManagerException($configExceptionDefault),
                 $request           = $this->getRequestMock('/test-uri/', 'GET'),
                 $event             = $this->getGetResponseForExceptionEventMock($request, $exception),
-                $logger            = $this->getLoggerMock(),
-                $exceptionListener = new TestedClass($kernel, $exceptionManager, $logger, $matchAll, $configExceptionDefault),
+                $exceptionListener = new TestedClass($kernel, $exceptionManager, $matchAll, $configExceptionDefault),
                 $exceptionListener->onKernelException($event),
                 $validResponse     = new JsonResponse($data, $statusCode, $headers)
             )
@@ -407,10 +359,6 @@ class ExceptionListener extends test
             ->mock($event)
                 ->call('setResponse')
                     ->withArguments($validResponse)
-                    ->once()
-            ->mock($logger)
-                ->call('create')
-                    ->withArguments($log, $level)
                     ->once()
         ;
     }
@@ -432,16 +380,12 @@ class ExceptionListener extends test
                 $exceptionManager  = $this->getManagerException($configExceptionDefault),
                 $request           = $this->getRequestMock('/test-uri/', 'GET'),
                 $event             = $this->getGetResponseForExceptionEventMock($request, $exception),
-                $logger            = $this->getLoggerMock(),
-                $exceptionListener = new TestedClass($kernel, $exceptionManager, $logger, $matchAll, $configExceptionDefault),
+                $exceptionListener = new TestedClass($kernel, $exceptionManager, $matchAll, $configExceptionDefault),
                 $exceptionListener->onKernelException($event)
             )
             ->then
                 ->mock($event)
                     ->call('setResponse')
-                        ->never()
-                ->mock($logger)
-                    ->call('create')
                         ->never()
         ;
     }
@@ -458,7 +402,6 @@ class ExceptionListener extends test
             'status'  => $statusCode,
             'code'    => $code,
             'message' => $message,
-            'level'   => 'error',
             'headers' => $headers,
         ];
         $data = [
@@ -468,7 +411,6 @@ class ExceptionListener extends test
                 'message' => 'Type '.$type.' not found',
             ]
         ];
-        $log = 'Code '.$code.' - Status '.$statusCode.' | Message : '.$message;
 
         $this
             ->given(
@@ -477,8 +419,7 @@ class ExceptionListener extends test
                 $exceptionManager  = $this->getManagerException($configExceptionDefault),
                 $request           = $this->getRequestMock('/test-uri/', 'GET'),
                 $event             = $this->getGetResponseForExceptionEventMock($request, $exception),
-                $logger            = $this->getLoggerMock(),
-                $exceptionListener = new TestedClass($kernel, $exceptionManager, $logger, $matchAll, $configExceptionDefault, false),
+                $exceptionListener = new TestedClass($kernel, $exceptionManager, $matchAll, $configExceptionDefault, false),
                 $exceptionListener->onKernelException($event),
                 $validResponse     = new JsonResponse($data, $statusCode, $headers)
             )
@@ -486,10 +427,6 @@ class ExceptionListener extends test
                 ->mock($event)
                     ->call('setResponse')
                         ->withArguments($validResponse)
-                        ->once()
-                ->mock($logger)
-                    ->call('create')
-                        ->withArguments($log, 'error')
                         ->once()
         ;
     }

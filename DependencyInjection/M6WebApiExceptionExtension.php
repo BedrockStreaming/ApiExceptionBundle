@@ -20,10 +20,7 @@ class M6WebApiExceptionExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter($this->getAlias().'.logger.prefix', $config['logger']['prefix']);
-
-        $this->loadLogger($container, $config['logger']);
-        $this->loadExceptionManager($container, $config['exception']);
+        $this->loadExceptionManager($container, $config);
         $this->loadExceptionListener($container, $config);
     }
 
@@ -36,37 +33,18 @@ class M6WebApiExceptionExtension extends Extension
     }
 
     /**
-     * load service logger
-     *
-     * @param ContainerBuilder $container
-     * @param array            $configLogger
-     */
-    protected function loadLogger(ContainerBuilder $container, array $configLogger)
-    {
-        $definition = new Definition(
-            'M6Web\Bundle\ApiExceptionBundle\Logger\Logger',
-            [
-                new Reference('logger'),
-                $configLogger['prefix'],
-            ]
-        );
-
-        $container->setDefinition($this->getAlias().'.logger', $definition);
-    }
-
-    /**
      * load service exception manager
      *
      * @param ContainerBuilder $container
-     * @param array            $configException
+     * @param array            $config
      */
-    protected function loadExceptionManager(ContainerBuilder $container, array $configException)
+    protected function loadExceptionManager(ContainerBuilder $container, array $config)
     {
         $definition = new Definition(
             'M6Web\Bundle\ApiExceptionBundle\Manager\ExceptionManager',
             [
-                $configException['default'],
-                $configException['exceptions'],
+                $config['default'],
+                $config['exceptions'],
             ]
         );
 
@@ -81,19 +59,14 @@ class M6WebApiExceptionExtension extends Extension
      */
     protected function loadExceptionListener(ContainerBuilder $container, array $config)
     {
-        if (is_null($config['logger']['service'])) {
-            $config['logger']['service'] = $this->getAlias().'.logger';
-        }
-
         $definition = new Definition(
             'M6Web\Bundle\ApiExceptionBundle\EventListener\ExceptionListener',
             [
                 new Reference('kernel'),
                 new Reference($this->getAlias().'.manager.exception'),
-                new Reference($config['logger']['service']),
-                $config['exception']['match_all'],
-                $config['exception']['default'],
-                $config['exception']['stack_trace'],
+                $config['match_all'],
+                $config['default'],
+                $config['stack_trace'],
             ]
         );
 

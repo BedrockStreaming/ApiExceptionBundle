@@ -6,7 +6,6 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\Config\FileLocator;
 use M6Web\Bundle\ApiExceptionBundle\DependencyInjection\M6WebApiExceptionExtension as TestedClass;
 
@@ -26,30 +25,12 @@ class M6WebApiExceptionExtension extends test
         return $container;
     }
 
-    protected function registerServiceLogger($container)
-    {
-        $definition = new Definition(
-            'M6Web\Bundle\ApiExceptionBundle\Tests\Fixtures\Logger\CustomLogger',
-            [
-                new Reference('logger'),
-                '%m6web_api_exception.logger.prefix%'
-            ]
-        );
-        $container->setDefinition('m6web_api_exception.logger.custom', $definition);
-
-        return $container;
-    }
-
     protected function getContainerForConfiguation($fixtureName)
     {
         $parameterBag = new ParameterBag(array('kernel.debug' => true));
         $container = new ContainerBuilder($parameterBag);
 
-        $definition = new Definition('Symfony\Bridge\Monolog\Logger', ['logger']);
-        $container->setDefinition('logger', $definition);
-
         $container = $this->registerServiceKernel($container);
-        $container = $this->registerServiceLogger($container);
 
         $extension = new TestedClass();
         $container->registerExtension($extension);
@@ -66,36 +47,24 @@ class M6WebApiExceptionExtension extends test
         $container->compile();
 
         $this
-            ->boolean($container->has('m6web_api_exception.logger'))
-                ->isTrue()
-            ->array($loggerArguments = $container->getDefinition('m6web_api_exception.logger')->getArguments())
-                ->hasSize(2)
-                ->object($loggerArguments[0])
-                    ->isInstanceOf('Symfony\Component\DependencyInjection\Reference')
-                ->string((string) $loggerArguments[0])
-                    ->isEqualTo('logger')
-                ->variable($loggerArguments[1])
-                    ->isNull()
             ->boolean($container->has('m6web_api_exception.manager.exception'))
                 ->isTrue()
             ->array($managerArguments = $container->getDefinition('m6web_api_exception.manager.exception')->getArguments())
                 ->hasSize(2)
                 ->array($managerArguments[0])
-                    ->hasSize(5)
+                    ->hasSize(4)
                     ->integer($managerArguments[0]['status'])
                         ->isEqualTo(500)
                     ->integer($managerArguments[0]['code'])
                         ->isEqualTo(0)
                     ->string($managerArguments[0]['message'])
                         ->isEqualTo('Internal server error')
-                    ->string($managerArguments[0]['level'])
-                        ->isEqualTo('error')
                     ->array($managerArguments[0]['headers'])
                         ->isEqualTo([])
                 ->array($managerArguments[1])
                     ->hasSize(0)
             ->array($listenerArguments = $container->getDefinition('m6web_api_exception.listener.exception')->getArguments())
-                ->hasSize(6)
+                ->hasSize(5)
                 ->object($listenerArguments[0])
                     ->isInstanceOf('Symfony\Component\DependencyInjection\Reference')
                 ->string((string) $listenerArguments[0])
@@ -104,25 +73,19 @@ class M6WebApiExceptionExtension extends test
                     ->isInstanceOf('Symfony\Component\DependencyInjection\Reference')
                 ->string((string) $listenerArguments[1])
                     ->isEqualTo('m6web_api_exception.manager.exception')
-                ->object($listenerArguments[2])
-                    ->isInstanceOf('Symfony\Component\DependencyInjection\Reference')
-                ->string((string) $listenerArguments[2])
-                    ->isEqualTo('m6web_api_exception.logger')
-                ->boolean($listenerArguments[3])
+                ->boolean($listenerArguments[2])
                     ->isEqualTo(true)
-                ->array($listenerArguments[4])
-                    ->hasSize(5)
+                ->array($listenerArguments[3])
+                    ->hasSize(4)
                     ->integer($managerArguments[0]['status'])
                         ->isEqualTo(500)
                     ->integer($managerArguments[0]['code'])
                         ->isEqualTo(0)
                     ->string($managerArguments[0]['message'])
                         ->isEqualTo('Internal server error')
-                    ->string($managerArguments[0]['level'])
-                        ->isEqualTo('error')
                     ->array($managerArguments[0]['headers'])
                         ->isEqualTo([])
-                ->boolean($listenerArguments[5])
+                ->boolean($listenerArguments[4])
                     ->isEqualTo(false)
         ;
     }
@@ -133,38 +96,18 @@ class M6WebApiExceptionExtension extends test
         $container->compile();
 
         $this
-            ->array($loggerArguments = $container->getDefinition('m6web_api_exception.logger')->getArguments())
-                ->hasSize(2)
-                ->object($loggerArguments[0])
-                    ->isInstanceOf('Symfony\Component\DependencyInjection\Reference')
-                ->string((string) $loggerArguments[0])
-                    ->isEqualTo('logger')
-                ->string($loggerArguments[1])
-                    ->isEqualTo('Test ===>')
-            ->boolean($container->has('m6web_api_exception.logger.custom'))
-                ->isTrue()
-            ->array($loggerCustomArguments = $container->getDefinition('m6web_api_exception.logger.custom')->getArguments())
-                ->hasSize(2)
-                ->object($loggerArguments[0])
-                    ->isInstanceOf('Symfony\Component\DependencyInjection\Reference')
-                ->string((string) $loggerArguments[0])
-                    ->isEqualTo('logger')
-                ->string($loggerArguments[1])
-                    ->isEqualTo('Test ===>')
             ->boolean($container->has('m6web_api_exception.manager.exception'))
                 ->isTrue()
             ->array($managerArguments = $container->getDefinition('m6web_api_exception.manager.exception')->getArguments())
                 ->hasSize(2)
                 ->array($managerArguments[0])
-                    ->hasSize(5)
+                    ->hasSize(4)
                     ->integer($managerArguments[0]['status'])
                         ->isEqualTo(400)
                     ->integer($managerArguments[0]['code'])
                         ->isEqualTo(1000)
                     ->string($managerArguments[0]['message'])
                         ->isEqualTo('Internal server error')
-                    ->string($managerArguments[0]['level'])
-                        ->isEqualTo('error')
                     ->array($managerArguments[0]['headers'])
                         ->isEqualTo([])
                 ->array($managerArguments[1])
@@ -180,19 +123,17 @@ class M6WebApiExceptionExtension extends test
                             ->string($managerArguments[1]['M6Web\Bundle\ApiExceptionBundle\Exception\ValidationFormException']['headers']['Exception'])
                                 ->isEqualTo('form validation failed')
                     ->array($managerArguments[1]['M6Web\Bundle\ApiExceptionBundle\Tests\Fixtures\Exception\TypeNotFoundException'])
-                        ->hasSize(5)
+                        ->hasSize(4)
                         ->integer($managerArguments[1]['M6Web\Bundle\ApiExceptionBundle\Tests\Fixtures\Exception\TypeNotFoundException']['status'])
                             ->isEqualTo(404)
                         ->integer($managerArguments[1]['M6Web\Bundle\ApiExceptionBundle\Tests\Fixtures\Exception\TypeNotFoundException']['code'])
                             ->isEqualTo(1002)
                         ->string($managerArguments[1]['M6Web\Bundle\ApiExceptionBundle\Tests\Fixtures\Exception\TypeNotFoundException']['message'])
                             ->isEqualTo('type {type} not found')
-                        ->string($managerArguments[1]['M6Web\Bundle\ApiExceptionBundle\Tests\Fixtures\Exception\TypeNotFoundException']['level'])
-                            ->isEqualTo('warning')
                         ->array($managerArguments[1]['M6Web\Bundle\ApiExceptionBundle\Tests\Fixtures\Exception\TypeNotFoundException']['headers'])
                             ->isEqualTo([])
             ->array($listenerArguments = $container->getDefinition('m6web_api_exception.listener.exception')->getArguments())
-                ->hasSize(6)
+                ->hasSize(5)
                 ->object($listenerArguments[0])
                     ->isInstanceOf('Symfony\Component\DependencyInjection\Reference')
                 ->string((string) $listenerArguments[0])
@@ -201,25 +142,19 @@ class M6WebApiExceptionExtension extends test
                     ->isInstanceOf('Symfony\Component\DependencyInjection\Reference')
                 ->string((string) $listenerArguments[1])
                     ->isEqualTo('m6web_api_exception.manager.exception')
-                ->object($listenerArguments[2])
-                    ->isInstanceOf('Symfony\Component\DependencyInjection\Reference')
-                ->string((string) $listenerArguments[2])
-                    ->isEqualTo('m6web_api_exception.logger.custom')
-                ->boolean($listenerArguments[3])
+                ->boolean($listenerArguments[2])
                     ->isEqualTo(false)
-                ->array($listenerArguments[4])
-                    ->hasSize(5)
+                ->array($listenerArguments[3])
+                    ->hasSize(4)
                     ->integer($managerArguments[0]['status'])
                         ->isEqualTo(400)
                     ->integer($managerArguments[0]['code'])
                         ->isEqualTo(1000)
                     ->string($managerArguments[0]['message'])
                         ->isEqualTo('Internal server error')
-                    ->string($managerArguments[0]['level'])
-                        ->isEqualTo('error')
                     ->array($managerArguments[0]['headers'])
                         ->isEqualTo([])
-                ->boolean($listenerArguments[5])
+                ->boolean($listenerArguments[4])
                     ->isEqualTo(true)
         ;
     }

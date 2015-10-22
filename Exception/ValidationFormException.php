@@ -22,7 +22,6 @@ class ValidationFormException extends HttpException implements FlattenErrorExcep
      * @param integer       $statusCode
      * @param integer       $code
      * @param string        $message
-     * @param string        $level
      * @param array         $headers
      */
     public function __construct(
@@ -30,11 +29,10 @@ class ValidationFormException extends HttpException implements FlattenErrorExcep
         $statusCode = 500,
         $code = 0,
         $message = '',
-        $level = 'error',
         array $headers = []
     ) {
         $this->form = $form;
-        parent::__construct($statusCode, $code, $message, $level, $headers);
+        parent::__construct($statusCode, $code, $message, $headers);
     }
 
     /**
