@@ -1,0 +1,38 @@
+{
+    "name": "m6web/api-exception-bundle",
+    "type" : "symfony-bundle",
+    "description": "Symfony2 bundle to manages exceptions",
+    "keywords": ["api", "exception", "bundle"],
+    "license" : "MIT",
+    "authors": [
+        {
+            "name": "M6Web",
+            "email" : "opensource@m6web.fr",
+            "homepage": "http://tech.m6web.fr/"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+        "symfony/http-kernel"            : "~2.7",
+        "symfony/dependency-injection"   : "~2.7",
+        "symfony/monolog-bridge"         : "~2.7",
+        "symfony/form"                   : "~2.7",
+        "symfony/yaml"                   : "~2.7",
+        "symfony/config"                 : "~2.7"
+    },
+    "require-dev": {
+        "atoum/atoum"                    : "~2.1",
+        "m6web/coke"                     : "~2.1",
+        "m6web/symfony2-coding-standard" : "~3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "M6Web\\Bundle\\ApiExceptionBundle\\": ""
+        }
+    },
+    "config": {
+        "bin-dir": "bin/"
+    },
+    "minimum-stability" : "dev",
+    "prefer-stable": true
+}

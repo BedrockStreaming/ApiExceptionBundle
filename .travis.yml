@@ -1,0 +1,14 @@
+language: php
+
+php:
+  - 5.5
+
+branches:
+  only:
+    - master
+
+install:
+  - composer install -n --dev
+
+script:
+  - bin/atoum

@@ -1,0 +1,16 @@
+m6web_api_exception:
+    match_all: false
+    stack_trace: true
+    default:
+        status: 400
+        code: 1000
+    exceptions:
+        M6Web\Bundle\ApiExceptionBundle\Exception\ValidationFormException:
+            code: 1001
+            message: "form validation failed"
+            headers:
+                Exception: "form validation failed"
+        M6Web\Bundle\ApiExceptionBundle\Tests\Fixtures\Exception\TypeNotFoundException:
+            status: 404
+            code: 1002
+            message: "type {type} not found"
