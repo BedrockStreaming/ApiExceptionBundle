@@ -11,8 +11,8 @@ install:
     - composer install -n --dev
 
 script:
-    - bin/atoum
+    - bin/atoum -c .atoum.travis.php
 
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
-    - php occular.phar code-coverage:upload --format=php-clover ./build/logs/clover.xml
+    - php occular.phar code-coverage:upload --format=php-clover clover.xml
