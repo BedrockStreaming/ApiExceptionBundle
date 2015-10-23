@@ -65,10 +65,21 @@ class ExceptionManager
      */
     protected function getConfigException($exceptionName)
     {
-        if (isset($this->exceptions[$exceptionName])) {
-            return array_merge($this->defaultConfig, $this->exceptions[$exceptionName]);
+        $exceptionParentName = get_parent_class($exceptionName);
+
+        if (in_array(
+            'M6Web\Bundle\ApiExceptionBundle\Exception\Interfaces\ExceptionInterface',
+            class_implements($exceptionParentName)
+        )) {
+            $parentConfig = $this->getConfigException($exceptionParentName);
+        } else {
+            $parentConfig = $this->defaultConfig;
         }
 
-        return $this->defaultConfig;
+        if (isset($this->exceptions[$exceptionName])) {
+            return array_merge($parentConfig, $this->exceptions[$exceptionName]);
+        }
+
+        return $parentConfig;
     }
 }
