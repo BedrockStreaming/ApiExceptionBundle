@@ -45,6 +45,44 @@ m6web_api_exception:
             message: "type not found"
 ```
 
+### Configuration extends system
+
+Parameters exception are determined by this configuration, configuration of these parents, and finally the default configuration.
+
+example :
+
+```yaml
+# ./app/config/config.yml
+
+m6web_api_exception:
+    stack_trace: true
+    default:
+        status: 500
+        code: 1000
+        message: "internal server error"
+        headers:
+            Exception: "error"
+    exceptions:
+        Acme\DemoBundle\Exception\NotFoundException:
+            status: 404
+            code: 1001
+            message: "resource not found"
+        Acme\DemoBundle\Exception\TypeNotFoundException: # extends Acme\DemoBundle\Exception\NotFoundException
+            code: 1002
+            message: "type {type} not found"
+```
+
+final configuration to `Acme\DemoBundle\Exception\TypeNotFoundException` :
+
+```yaml
+Acme\DemoBundle\Exception\TypeNotFoundException:
+    status: 404
+    code: 1002
+    message: "type {type} not found"
+    headers:
+        Exception: "error"
+```
+
 ---
 
 [Prev : Log](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/log.md)
