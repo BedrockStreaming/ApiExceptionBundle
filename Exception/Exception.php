@@ -66,7 +66,6 @@ class Exception extends \Exception implements ExceptionInterface
         preg_match(self::VARIABLE_REGEX, $message, $variables);
 
         foreach ($variables as $variable) {
-
             $variableName = substr($variable, 1, -1);
 
             if (!isset($this->$variableName)) {
