@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface as SymfonyHttpExceptionInterface;
 use M6Web\Bundle\ApiExceptionBundle\Manager\ExceptionManager;
-use M6Web\Bundle\ApiExceptionBundle\Logger\LoggerInterface;
 use M6Web\Bundle\ApiExceptionBundle\Exception\Interfaces\ExceptionInterface;
 use M6Web\Bundle\ApiExceptionBundle\Exception\Interfaces\HttpExceptionInterface;
 use M6Web\Bundle\ApiExceptionBundle\Exception\Interfaces\FlattenErrorExceptionInterface;
@@ -74,7 +73,7 @@ class ExceptionListener
     {
         $exception = $event->getException();
 
-        if (!($request = $event->getRequest())
+        if (!($event->getRequest())
             || ($this->matchAll === false && !$this->isApiException($exception))
         ) {
             return;
@@ -105,11 +104,11 @@ class ExceptionListener
     /**
      * Get exception status code
      *
-     * @param $exception
+     * @param \Exception $exception
      *
      * @return integer
      */
-    private function getStatusCode($exception)
+    private function getStatusCode(\Exception $exception)
     {
         $statusCode = $this->default['status'];
 
@@ -125,11 +124,11 @@ class ExceptionListener
     /**
      * Get exception message
      *
-     * @param $exception
+     * @param \Exception $exception
      *
      * @return integer
      */
-    private function getMessage($exception)
+    private function getMessage(\Exception $exception)
     {
         $message = $exception->getMessage();
 
@@ -143,11 +142,11 @@ class ExceptionListener
     /**
      * Get exception headers
      *
-     * @param $exception
+     * @param \Exception $exception
      *
      * @return array
      */
-    private function getHeaders($exception)
+    private function getHeaders(\Exception $exception)
     {
         $headers = $this->default['headers'];
 
@@ -163,11 +162,11 @@ class ExceptionListener
     /**
      * Is api exception
      *
-     * @param $exception
+     * @param \Exception $exception
      *
      * @return boolean
      */
-    private function isApiException($exception)
+    private function isApiException(\Exception $exception)
     {
         if ($exception instanceof ExceptionInterface) {
             return true;
@@ -179,11 +178,11 @@ class ExceptionListener
     /**
      * Is flatten error exception
      *
-     * @param $exception
+     * @param \Exception $exception
      *
      * @return boolean
      */
-    private function isFlattenErrorException($exception)
+    private function isFlattenErrorException(\Exception $exception)
     {
         if ($exception instanceof FlattenErrorExceptionInterface) {
             return true;
