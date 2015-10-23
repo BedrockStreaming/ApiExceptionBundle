@@ -83,6 +83,6 @@ Result with user `1856` not found
 
 ---
 
-[Prev : Usage](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/usage.md)
+[Prev : Usage](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/usage.md)
 
-[Next : Variables](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/variables.md)
+[Next : Stack Trace](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/stack_trace.md)

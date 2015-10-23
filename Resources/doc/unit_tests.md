@@ -85,6 +85,6 @@ class UserManager
 
 ---
 
-[Prev : Configuration](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/configuration.md)
+[Prev : Configuration](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/configuration.md)
 
-[Next : About](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/about.md)
+[Next : About](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/about.md)

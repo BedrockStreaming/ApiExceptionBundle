@@ -119,6 +119,6 @@ Result with invalid post parameters
 
 ---
 
-[Prev : Errors](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/errors.md)
+[Prev : Errors](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/errors.md)
 
-[Next : Match](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/match.md)
+[Next : Match](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/match.md)

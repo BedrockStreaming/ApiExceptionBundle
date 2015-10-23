@@ -31,4 +31,4 @@ $ composer update m6web/api-exception-bundle
 
 ---
 
-[Next : Usage](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/usage.md)
+[Next : Usage](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/usage.md)

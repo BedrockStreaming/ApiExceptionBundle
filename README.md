@@ -16,17 +16,17 @@ For documentation, see:
 Resources/doc/
 ```
 
-- [Installation](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/installation.md)
-- [Usage](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/usage.md)
-- [Variables](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/variables.md)
-- [Stack Trace](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/stack_trace.md)
-- [Errors](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/errors.md)
-- [Form](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/form.md)
-- [Match](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/match.md)
-- [Log](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/log.md)
-- [Configuration](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/configuration.md)
-- [Unit Tests](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/unit_tests.md)
-- [About](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/about.md)
+- [Installation](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/installation.md)
+- [Usage](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/usage.md)
+- [Variables](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/variables.md)
+- [Stack Trace](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/stack_trace.md)
+- [Errors](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/errors.md)
+- [Form](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/form.md)
+- [Match](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/match.md)
+- [Log](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/log.md)
+- [Configuration](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/configuration.md)
+- [Unit Tests](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/unit_tests.md)
+- [About](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/about.md)
 
 ## Contributing
 

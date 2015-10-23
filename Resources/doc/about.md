@@ -14,4 +14,4 @@ This bundle is released under the MIT license.
 
 ---
 
-[Prev : Unit Tests](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/unit_tests.md)
+[Prev : Unit Tests](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/unit_tests.md)

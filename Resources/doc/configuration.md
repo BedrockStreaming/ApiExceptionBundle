@@ -47,6 +47,6 @@ m6web_api_exception:
 
 ---
 
-[Prev : Log](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/log.md)
+[Prev : Log](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/log.md)
 
-[Next : Unit Tests](https://github.com/M6Web/ApiExceptionBundle/blob/master/doc/unit_tests.md)
+[Next : Unit Tests](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/unit_tests.md)
