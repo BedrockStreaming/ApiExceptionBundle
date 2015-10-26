@@ -1,0 +1,16 @@
+filter:
+    excluded_paths: ['vendor/*', 'Tests/*']
+
+before_commands:
+    - "composer self-update"
+    - "composer install --prefer-source --dev"
+
+tools:
+    external_code_coverage:
+        timeout: 600
+    php_mess_detector: true
+    php_code_sniffer: true
+    sensiolabs_security_checker: true
+    php_pdepend: true
+    php_loc: true
+    php_cpd: true

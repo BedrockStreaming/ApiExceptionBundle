@@ -15,4 +15,4 @@ script:
 
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
-    - php occular.phar code-coverage:upload --format=php-clover clover.xml
+    - php ocular.phar code-coverage:upload --format=php-clover clover.xml
