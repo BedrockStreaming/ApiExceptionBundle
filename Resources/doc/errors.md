@@ -19,14 +19,20 @@ class UnknowException implements FlattenErrorExceptionInterface
     /**
      * @var mixed
      */
-    protected $errors;
+    protected $var1;
+    
+    /**
+     * @var mixed
+     */
+    protected $var2;
     
     /**
      * @param mixed $errors
      */
-    public function __construct($errors)
+    public function __construct($var1, $var2)
     {
-        $this->errors = $errors;
+        $this->var1 = $var1;
+        $this->var2 = $var2;
     }
     
     /**
@@ -36,11 +42,38 @@ class UnknowException implements FlattenErrorExceptionInterface
      */
     public function getFlattenErrors()
     {
-        /* your algo */
+        $errors = [];
+        
+        /* your algo with $var1 and $var2 to compose array */
+        
+        return $errors
     }
 }
 ```
 *Example: `M6Web\Bundle\ApiExceptionBundle\Exception\ValidationFormException`*
+
+Use your exception with errors
+
+```php
+<?php 
+
+namespace Acme\DemoBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Acme\DemoBundle\Exception\UnknowException;
+
+/**
+ * Class DefaultController
+ */
+class DefaultController extends Controller
+{
+    /*...*/
+
+    throw new UnknowException($var1, $var2);
+            
+    /*...*/
+}
+```
 
 result to json reponse
 

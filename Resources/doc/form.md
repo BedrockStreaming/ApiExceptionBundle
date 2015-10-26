@@ -92,6 +92,46 @@ m6web_api_exception:
                 message: "validation user form failed"
 ```
 
+use new exception
+
+```php
+<?php 
+
+namespace Acme\DemoBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Acme\DemoBundle\Form\UserType;
+use Acme\DemoBundle\Exception\UserTypeValidationException;
+
+/**
+ * Class UserController
+ */
+class UserController extends Controller
+{
+    /*...*/
+
+    /**
+     * @param Request $request
+     *
+     * @throws UserTypeValidationException
+     */
+    public function createAction(Request $request)
+    {
+        $formUser = $this->createForm(new UserType());
+        $formUser->handleRequest($request);
+    
+        if (!$formUser->isValid()) {
+            throw new UserTypeValidationException($formUser);
+        }
+
+        /*...*/
+    }
+    
+    /*...*/
+}
+```
+
 Result with invalid post parameters
 
 ```json
