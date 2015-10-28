@@ -38,7 +38,7 @@ See [CONTRIBUTING](https://github.com/M6Web/ApiExceptionBundle/blob/master/CONTR
 
 ## Credits
 
-Developped by the Frack Team of M6 Web.
+Developed by the Frack Team of M6 Web.
 
 ## License
 

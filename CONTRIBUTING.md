@@ -21,7 +21,7 @@ Here are few rules to follow for a easier code review before the maintainers acc
 
 ### Install project to development
 
-Get sources dependancies :
+Get sources dependencies :
 
 ```
 composer install

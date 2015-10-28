@@ -12,9 +12,9 @@ namespace Acme\DemoBundle\Exception;
 use M6Web\Bundle\ApiExceptionBundle\Exception\Interfaces\FlattenErrorExceptionInterface;
 
 /**
- * Class UnknowException
+ * Class UnknownException
  */
-class UnknowException implements FlattenErrorExceptionInterface
+class UnknownException implements FlattenErrorExceptionInterface
 {
     /**
      * @var mixed
@@ -60,7 +60,7 @@ Use your exception with errors
 namespace Acme\DemoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Acme\DemoBundle\Exception\UnknowException;
+use Acme\DemoBundle\Exception\UnknownException;
 
 /**
  * Class DefaultController
@@ -69,13 +69,13 @@ class DefaultController extends Controller
 {
     /*...*/
 
-    throw new UnknowException($var1, $var2);
+    throw new UnknownException($var1, $var2);
             
     /*...*/
 }
 ```
 
-result to json reponse
+result to json response
 
 ```json
 {

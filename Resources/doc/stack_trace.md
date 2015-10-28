@@ -1,6 +1,6 @@
 # Stack Trace
 
-Additional stack trace exception to json reponse
+Additional stack trace exception to json response
 
 ```yaml
 # ./app/config/config.yml
