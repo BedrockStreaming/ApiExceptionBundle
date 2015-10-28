@@ -68,14 +68,14 @@ class UserManager
     {
         $this
             ->given(
-                $idUserUnknow = 0;
+                $idUserUnknown = 0;
                 $userManager = new TestedClass(...)
             )
             ->then
-                ->exception(function() use ($userManager, $idUserUnknow) {
-                    $userManager->getUser($idUserUnknow);
+                ->exception(function() use ($userManager, $idUserUnknown) {
+                    $userManager->getUser($idUserUnknown);
                 })
-                    ->isIntanceOf('Acme\DemoBundle\Exception\UserNotFoundException')
+                    ->isInstanceOf('Acme\DemoBundle\Exception\UserNotFoundException')
                     ->hasCode(?) // No sens, because configuration not initialized
                     ->hasMessage(?) // No sens, because configuration not initialized
         ;

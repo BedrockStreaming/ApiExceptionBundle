@@ -1,6 +1,6 @@
 # Match exceptions
 
-By default, `M6WebApiExceptionBundle` transform all exceptions to json reponse, configured in yaml or not. If you want only tranform exceptions provided by M6WebApiExceptionBundle, just configure `match_all` to `false`
+By default, `M6WebApiExceptionBundle` transform all exceptions to json response, configured in yaml or not. If you want only transform exceptions provided by M6WebApiExceptionBundle, just configure `match_all` to `false`
 ```yaml
 # ./app/config/config.yml
 

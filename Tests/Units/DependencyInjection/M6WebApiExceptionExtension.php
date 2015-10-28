@@ -25,7 +25,7 @@ class M6WebApiExceptionExtension extends test
         return $container;
     }
 
-    protected function getContainerForConfiguation($fixtureName)
+    protected function getContainerForConfiguration($fixtureName)
     {
         $parameterBag = new ParameterBag(array('kernel.debug' => true));
         $container = new ContainerBuilder($parameterBag);
@@ -43,7 +43,7 @@ class M6WebApiExceptionExtension extends test
 
     public function testDefaultConfiguration()
     {
-        $container = $this->getContainerForConfiguation('config');
+        $container = $this->getContainerForConfiguration('config');
         $container->compile();
 
         $this
@@ -92,7 +92,7 @@ class M6WebApiExceptionExtension extends test
 
     public function testCustomConfiguration()
     {
-        $container = $this->getContainerForConfiguation('config_custom');
+        $container = $this->getContainerForConfiguration('config_custom');
         $container->compile();
 
         $this
