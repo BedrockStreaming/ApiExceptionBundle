@@ -5,8 +5,7 @@ By default, `M6WebApiExceptionBundle` transform all exceptions to json response,
 # ./app/config/config.yml
 
 m6web_api_exception:
-    exception:
-        match_all: false
+    match_all: false
 ```
 
 Now, only exceptions which implement `M6Web\Bundle\ApiExceptionBundle\Exception\Interfaces\ExceptionInterface` will turn into json response with this bundle
