@@ -84,12 +84,11 @@ Configure this new exception
 # ./app/config/config.yml
 
 m6web_api_exception:
-    exception:
-        exceptions:
-            Acme\DemoBundle\Exception\UserTypeValidationException:
-                status: 400
-                code: 4723
-                message: "validation user form failed"
+    exceptions:
+        Acme\DemoBundle\Exception\UserTypeValidationException:
+            status: 400
+            code: 4723
+            message: "validation user form failed"
 ```
 
 use new exception
