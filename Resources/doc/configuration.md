@@ -21,7 +21,8 @@ Node to configure bundle `m6web_api_exception`
         - `...`
     - `...`
     
-*NB : `status` and `headers` are enabled only for exceptions that implements `M6Web\Bundle\ApiExceptionBundle\Exception\Interfaces\HttpExceptionInterface`*
+*NB : `code` is displayed only if greater than `0`*
+*NB 2 : `status` and `headers` are enabled only for exceptions that implements `M6Web\Bundle\ApiExceptionBundle\Exception\Interfaces\HttpExceptionInterface`*
     
 ### Configuration example
 
