@@ -86,7 +86,11 @@ class ExceptionListener
         $statusCode = $this->getStatusCode($exception);
 
         $data['error']['status']  = $statusCode;
-        $data['error']['code']    = $exception->getCode();
+
+        if ($code = $exception->getCode()) {
+            $data['error']['code'] = $code;
+        }
+
         $data['error']['message'] = $this->getMessage($exception);
 
         if ($this->isFlattenErrorException($exception)) {

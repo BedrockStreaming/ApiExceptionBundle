@@ -177,6 +177,47 @@ class ExceptionListener extends test
         ;
     }
 
+    public function testOnKernelExceptionWithMatchAllAndConfigExceptionSameDefaultWithoutCode()
+    {
+        $matchAll   = true;
+        $statusCode = 400;
+        $code       = 0;
+        $message    = 'This is an exception for test listener';
+        $headers    = [
+            'Exception' => 'bad request'
+        ];
+        $configExceptionDefault = [
+            'status'  => $statusCode,
+            'code'    => $code,
+            'message' => $message,
+            'headers' => $headers,
+        ];
+        $data = [
+            'error' => [
+                'status'  => $statusCode,
+                'message' => $message,
+            ]
+        ];
+
+        $this
+            ->given(
+                $exception         = new BadRequestException,
+                $kernel            = $this->getKernelMock(),
+                $exceptionManager  = $this->getManagerException($configExceptionDefault),
+                $request           = $this->getRequestMock('/test-uri/', 'GET'),
+                $event             = $this->getGetResponseForExceptionEventMock($request, $exception),
+                $exceptionListener = new TestedClass($kernel, $exceptionManager, $matchAll, $configExceptionDefault, false),
+                $exceptionListener->onKernelException($event),
+                $validResponse     = new JsonResponse($data, $statusCode, $headers)
+            )
+            ->then
+            ->mock($event)
+            ->call('setResponse')
+                ->withArguments($validResponse)
+                ->once()
+        ;
+    }
+
     public function testOnKernelExceptionWithMatchAllAndConfigExceptionDifferentDefaultWithoutHttpException()
     {
         $statusCodeDefault = 500;

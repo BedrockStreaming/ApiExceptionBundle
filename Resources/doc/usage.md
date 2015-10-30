@@ -29,7 +29,7 @@ m6web_api_exception:
         exceptions:
             Acme\DemoBundle\Exception\UserNotFoundException:
                 status: 404 # Used for exceptions implements HttpExceptionInterface
-                code: 5286 # Create an unique code for this exception in your API
+                code: 5286 # Create an unique code for this exception in your API, optional, default to 0 and not displayed
                 message: "user not found"
 ```
 *The configuration will impact only the exceptions that implements `M6Web\Bundle\ApiExceptionBundle\Exception\Interfaces\ExceptionInterface`*
