@@ -71,6 +71,6 @@ result request with bad user and stack trace enabled
 
 ---
 
-[Prev : Variables](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/variables.md)
+[Prev : Variables](variables.md)
 
-[Next : Errors](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/errors.md)
+[Next : Errors](errors.md)

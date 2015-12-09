@@ -22,21 +22,21 @@ For documentation, see:
 Resources/doc/
 ```
 
-- [Installation](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/installation.md)
-- [Usage](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/usage.md)
-- [Variables](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/variables.md)
-- [Stack Trace](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/stack_trace.md)
-- [Errors](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/errors.md)
-- [Form](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/form.md)
-- [Match](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/match.md)
-- [Log](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/log.md)
-- [Configuration](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/configuration.md)
-- [Unit Tests](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/unit_tests.md)
-- [About](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/about.md)
+- [Installation](Resources/doc/installation.md)
+- [Usage](Resources/doc/usage.md)
+- [Variables](Resources/doc/variables.md)
+- [Stack Trace](Resources/doc/stack_trace.md)
+- [Errors](Resources/doc/errors.md)
+- [Form](Resources/doc/form.md)
+- [Match](Resources/doc/match.md)
+- [Log](Resources/doc/log.md)
+- [Configuration](Resources/doc/configuration.md)
+- [Unit Tests](Resources/doc/unit_tests.md)
+- [About](Resources/doc/about.md)
 
 ## Contributing
 
-See [CONTRIBUTING](https://github.com/M6Web/ApiExceptionBundle/blob/master/CONTRIBUTING.md) file.
+See [CONTRIBUTING](CONTRIBUTING.md) file.
 
 ## Credits
 

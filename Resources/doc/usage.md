@@ -87,6 +87,6 @@ result request with bad user
 
 ---
 
-[Prev : Installation](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/installation.md)
+[Prev : Installation](installation.md)
 
-[Next : Variables](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/variables.md)
+[Next : Variables](variables.md)

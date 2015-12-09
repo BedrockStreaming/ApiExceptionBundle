@@ -101,6 +101,6 @@ result to json response
 
 ---
 
-[Prev : Stack Trace](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/stack_trace.md)
+[Prev : Stack Trace](stack_trace.md)
 
-[Next : Form](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/form.md)
+[Next : Form](form.md)

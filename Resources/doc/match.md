@@ -66,6 +66,6 @@ Result
 
 ---
 
-[Prev : Form](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/form.md)
+[Prev : Form](form.md)
 
-[Next : Log](https://github.com/M6Web/ApiExceptionBundle/blob/master/Resources/doc/log.md)
+[Next : Log](log.md)
