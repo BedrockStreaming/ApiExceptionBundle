@@ -79,6 +79,8 @@ class ExceptionListener
             return;
         }
 
+        $data = [];
+
         if ($this->isApiException($exception)) {
             $exception = $this->exceptionManager->configure($exception);
         }
@@ -99,6 +101,18 @@ class ExceptionListener
 
         if ($this->stackTrace) {
             $data['error']['stack_trace'] = $exception->getTrace();
+
+            // Clean stacktrace to avoid circular reference or invalid type
+            array_walk_recursive(
+                $data['error']['stack_trace'],
+                function(&$item) {
+                    if (is_object($item)) {
+                        $item = get_class($item);
+                    } elseif (is_resource($item)) {
+                        $item = get_resource_type($item);
+                    }
+                }
+            );
         }
 
         $response = new JsonResponse($data, $statusCode, $this->getHeaders($exception));
