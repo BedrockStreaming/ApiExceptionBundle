@@ -75,6 +75,7 @@ class M6WebApiExceptionExtension extends Extension
             [
                 'event' => 'kernel.exception',
                 'method' => 'onKernelException',
+                'priority' => '-100' // as the setresponse stop the exception propagation, this listener has to pass in last position
             ]
         );
 
