@@ -13,12 +13,12 @@
     ],
     "require": {
         "php": ">=5.5",
-        "symfony/http-kernel"            : "~2.7",
-        "symfony/dependency-injection"   : "~2.7",
-        "symfony/monolog-bridge"         : "~2.7",
-        "symfony/form"                   : "~2.7",
-        "symfony/yaml"                   : "~2.7",
-        "symfony/config"                 : "~2.7"
+        "symfony/http-kernel"            : "~2.7|~3.0",
+        "symfony/dependency-injection"   : "~2.7|~3.0",
+        "symfony/monolog-bridge"         : "~2.7|~3.0",
+        "symfony/form"                   : "~2.7|~3.0",
+        "symfony/yaml"                   : "~2.7|~3.0",
+        "symfony/config"                 : "~2.7|~3.0"
     },
     "require-dev": {
         "atoum/atoum"                    : "~2.1",
