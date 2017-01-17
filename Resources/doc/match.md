@@ -34,7 +34,7 @@ class UserManager
     }
     
     if (!$user) {
-        throw new HttpException(404, 'user not found', 96);
+        throw new HttpException(404, 96, 'user not found');
     }
     
     /*...*/
