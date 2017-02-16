@@ -6,8 +6,7 @@ Additional stack trace exception to json response
 # ./app/config/config.yml
 
 m6web_api_exception:
-    exception:
-        stack_trace: true
+    stack_trace: true
 ```
 
 result request with bad user and stack trace enabled

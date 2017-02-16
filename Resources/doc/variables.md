@@ -60,12 +60,11 @@ Add variables in configuration message.
 # ./app/config/config.yml
 
 m6web_api_exception:
-    exception:
-        exceptions:
-            Acme\DemoBundle\Exception\UserNotFoundException:
-                status: 404
-                code: 5286
-                message: "user {id} not found"
+    exceptions:
+        Acme\DemoBundle\Exception\UserNotFoundException:
+            status: 404
+            code: 5286
+            message: "user {id} not found"
 ```
 *Variables must be between `{}` (example `{myVariable}`)*
 
