@@ -21,7 +21,7 @@
         "symfony/config"                 : "^2.7||^3.0"
     },
     "require-dev": {
-        "atoum/atoum"                    : "^2.1",
+        "atoum/atoum"                    : "^2.8||^3.0",
         "m6web/coke"                     : "^2.1",
         "m6web/symfony2-coding-standard" : "^3.1"
     },

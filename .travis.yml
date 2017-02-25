@@ -2,6 +2,9 @@ language: php
 
 php:
     - 5.5
+    - 5.6
+    - 7.0
+    - 7.1
 
 branches:
   only:
@@ -11,7 +14,7 @@ install:
     - composer install -n --dev
 
 script:
-    - bin/atoum -c .atoum.travis.php
+    - bin/atoum
 
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
