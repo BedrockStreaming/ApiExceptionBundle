@@ -47,6 +47,7 @@ class M6WebApiExceptionExtension extends Extension
                 $config['exceptions'],
             ]
         );
+        $definition->setPublic(true);
 
         $container->setDefinition($this->getAlias().'.manager.exception', $definition);
     }
@@ -70,12 +71,14 @@ class M6WebApiExceptionExtension extends Extension
             ]
         );
 
+        $definition->setPublic(true);
+
         $definition->addTag(
             'kernel.event_listener',
             [
                 'event' => 'kernel.exception',
                 'method' => 'onKernelException',
-                'priority' => '-100' // as the setresponse stop the exception propagation, this listener has to pass in last position
+                'priority' => '-100' // as the setResponse stop the exception propagation, this listener has to pass in last position
             ]
         );
 
